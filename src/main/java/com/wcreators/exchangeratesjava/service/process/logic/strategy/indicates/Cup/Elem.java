@@ -2,6 +2,7 @@ package com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import static java.lang.Math.min;
 
 @Builder
 @Getter
+@ToString
 public class Elem {
 
     private double high;

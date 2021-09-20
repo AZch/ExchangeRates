@@ -2,13 +2,10 @@ package com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates
 
 import com.wcreators.exchangeratesjava.model.Rate;
 import com.wcreators.exchangeratesjava.util.DateUtils;
-import lombok.Builder;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
@@ -50,5 +47,12 @@ public class SMMA {
         return elems.get(index).getPoint();
     }
 
+    public int count(int index) {
+        return elems.get(index).getCount();
+    }
+
+    public double sum(int index) {
+        return elems.get(index).getSum();
+    }
 
 }

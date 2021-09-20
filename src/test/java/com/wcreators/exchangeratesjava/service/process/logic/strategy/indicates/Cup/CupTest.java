@@ -34,12 +34,9 @@ class CupTest {
             );
         }
         List<Rate> rates = split(elems);
-        rates.forEach(rate -> cup.addRate(rate));
+        rates.forEach(cup::addRate);
 
         assertEquals(elems.size(), cup.getElemsSize());
-        if (elems.size() != cup.getElemsSize()) {
-            return;
-        }
 
         for (int i = 0; i < elems.size(); i++) {
             String indexedErrorMessage = String.format("Incorrect calculated value for %d", i);

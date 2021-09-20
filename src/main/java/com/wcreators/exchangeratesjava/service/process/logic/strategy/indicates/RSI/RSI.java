@@ -59,4 +59,8 @@ public class RSI {
             current = elemFromRate.apply(rate);
         }
     }
+
+    public double point(int index) {
+        return elems.get(index).getPoint();
+    }
 }

@@ -25,6 +25,10 @@ public class STOCH {
     int periodsLow = 3;
     int periodsHigh = 3;
 
+    public int getElemsSize() {
+        return elems.size();
+    }
+
     public void addRate(Rate rate) {
         cup.addRate(rate);
 
@@ -39,5 +43,9 @@ public class STOCH {
             emaSlowD.addRate(kRate);
             emaFastK.addRate(kRate);
         }
+    }
+
+    public double point(int index) {
+        return elems.get(index).getPoint();
     }
 }

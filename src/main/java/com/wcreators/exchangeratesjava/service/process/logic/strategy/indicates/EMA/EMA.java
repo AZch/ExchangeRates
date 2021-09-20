@@ -43,4 +43,12 @@ public class EMA {
             current = elemFromRate.apply(rate);
         }
     }
+
+    public int count(int index) {
+        return elems.get(index).getCount();
+    }
+
+    public double sum(int index) {
+        return elems.get(index).getSum();
+    }
 }

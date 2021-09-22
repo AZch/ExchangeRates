@@ -25,7 +25,7 @@ public class StrategyOne {
         }
 
         cup.addRate(rate);
-        ema.addRate(rate);
+        ema.addRate();
         rsi.addRate(rate);
         stoch.addRate(rate);
 

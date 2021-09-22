@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
-@Scope("prototype")
 public class Cup {
 
     private final List<Elem> elems = new LinkedList<>();
@@ -46,6 +46,14 @@ public class Cup {
 
     public double open(int index) {
         return elems.get(index).getOpen();
+    }
+
+    public Date start(int index) {
+        return elems.get(index).getStart();
+    }
+
+    public Date end(int index) {
+        return elems.get(index).getEnd();
     }
 
     private final Function<Rate, Elem> elemFromRate = rate -> Elem.builder()

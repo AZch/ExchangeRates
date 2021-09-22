@@ -40,8 +40,8 @@ public class STOCH {
             double fastK = 100 * ((closeLast - minLastLow) / (maxLastHigh - minLastLow));
             elems.add(Elem.builder().point(fastK).time(rate.getCreatedDate()).build());
             Rate kRate = Rate.builder().sell(fastK).createdDate(rate.getCreatedDate()).build();
-            emaSlowD.addRate(kRate);
-            emaFastK.addRate(kRate);
+            emaSlowD.addRate();
+            emaFastK.addRate();
         }
     }
 

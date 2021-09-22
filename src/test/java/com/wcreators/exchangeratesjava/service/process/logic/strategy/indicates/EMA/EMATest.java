@@ -1,6 +1,7 @@
 package com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.EMA;
 
 import com.wcreators.exchangeratesjava.model.Rate;
+import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.Cup.Cup;
 import com.wcreators.exchangeratesjava.util.DateUtils;
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +14,28 @@ class EMATest {
     private final int maxMinutes = 5;
     private final int period = 5;
     private final DateUtils dateUtils = new DateUtils();
-    private final EMA ema = new EMA(dateUtils);
+    private final Cup cup = new Cup(dateUtils);
+    private final EMA ema = new EMA(dateUtils, cup);
 
     @Test
     public void loadData() {
         List<Rate> rates = generateRates();
         List<Elem> elems = generateEMA(rates);
 
-        rates.forEach(ema::addRate);
+        for (Rate rate : rates) {
+            cup.addRate(rate);
+            ema.addRate();
+        }
+        Date lastCreatedDate = rates.get(rates.size() - 1).getCreatedDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(lastCreatedDate);
+        calendar.add(Calendar.MINUTE, 1);
+        Rate rate = Rate.builder()
+                .createdDate(calendar.getTime())
+                .sell(0D)
+                .build();
+        cup.addRate(rate);
+        ema.addRate();
 
 
         assertEquals(elems.size(), ema.getElemsSize());
@@ -49,7 +64,6 @@ class EMATest {
                 }
                 ema.add(
                         Elem.builder()
-                                .count(elem.getCount())
                                 .sum((rates.get(i).getSell() - prev.getSum()) * multiplier + prev.getSum())
                                 .time(elem.getTime())
                                 .build()
@@ -72,7 +86,6 @@ class EMATest {
                         Elem.builder()
                                 .time(rate.getCreatedDate())
                                 .sum(0D)
-                                .count(0)
                                 .build()
                 );
             } else {
@@ -80,7 +93,6 @@ class EMATest {
                         Elem.builder()
                                 .time(rate.getCreatedDate())
                                 .sum(interm / period)
-                                .count(period)
                                 .build()
                 );
                 interm -= rates.get(i + 1 - period).getSell();
@@ -108,13 +120,14 @@ class EMATest {
                                 .sell(values[index])
 //                                .sell(random.nextInt(10) + random.nextDouble())
                                 .buy(0D)
-                                .createdDate(getNextPeriodTime(calendar))
+                                .createdDate(getNextDate(calendar))
+//                                .createdDate(getNextPeriodTime(calendar))
                                 .build()
                 );
                 index++;
             }
             rates.addAll(tempRates);
-            getNextDate(calendar);
+//            getNextDate(calendar);
         }
 
 
@@ -123,7 +136,8 @@ class EMATest {
 
     private Date getNextDate(Calendar calendar) {
         calendar.add(Calendar.MINUTE, 1);
-        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.SECOND, 1);
+//        calendar.set(Calendar.SECOND, 0);
         return calendar.getTime();
     }
 

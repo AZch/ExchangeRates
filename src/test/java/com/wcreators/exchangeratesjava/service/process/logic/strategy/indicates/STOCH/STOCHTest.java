@@ -14,12 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class STOCHTest {
 
-
     private final int maxMinutes = 1000;
     private final DateUtils dateUtils = new DateUtils();
     private final Cup cup = new Cup(dateUtils);
-    private final EMA emaFastK = new EMA(dateUtils);
-    private final EMA emaSlowD = new EMA(dateUtils);
+    private final EMA emaFastK = new EMA(dateUtils, cup);
+    private final EMA emaSlowD = new EMA(dateUtils, cup);
     private final STOCH stoch = new STOCH(cup, emaFastK, emaSlowD);
 
     @Test

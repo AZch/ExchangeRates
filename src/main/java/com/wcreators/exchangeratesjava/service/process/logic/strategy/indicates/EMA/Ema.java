@@ -16,7 +16,7 @@ import java.util.List;
 public class Ema implements EmaIndicator {
 
     private final List<Point> elems = new LinkedList<>();
-    private final int period = 5;
+    private int period = 5;
     private double firstSum = 0;
 
     @Override
@@ -72,5 +72,9 @@ public class Ema implements EmaIndicator {
 
     public int getPeriod() {
         return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
     }
 }

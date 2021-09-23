@@ -20,17 +20,15 @@ public class STOCH {
     private final Cup cup;
     private final Ema emaFastK;
     private final Ema emaSlowD;
-    private final int periodsLow = 5;
-    private final int periodsHigh = 5;
+    private int period = 5;
 
     public void update() {
-        int maxPeriod = max(periodsHigh, periodsLow);
         Date date = cup.getEnd(cup.getElemsSize() - 1);
-        if (cup.getElemsSize() < maxPeriod) {
+        if (cup.getElemsSize() < period) {
             emaFastK.addPoint(0D, date);
             emaSlowD.addPoint(0D, date);
         } else {
-            int lowerBound = cup.getElemsSize() - maxPeriod;
+            int lowerBound = cup.getElemsSize() - period;
             int upperBound = cup.getElemsSize();
             double minLastLow = cup.minLastLow(lowerBound, upperBound).orElse(0D);
             double maxLastHigh = cup.maxLastHigh(lowerBound, upperBound).orElse(0D);
@@ -51,12 +49,28 @@ public class STOCH {
         return emaSlowD.getValue(index);
     }
 
-    public int getPeriodsLow() {
-        return periodsLow;
+    public int getPeriodSlowD() {
+        return emaSlowD.getPeriod();
     }
 
-    public int getPeriodsHigh() {
-        return periodsHigh;
+    public int getPeriodFastK() {
+        return emaFastK.getPeriod();
+    }
+
+    public void setPeriodSlowD(int period) {
+        this.emaSlowD.setPeriod(period);
+    }
+
+    public void setPeriodFastK(int period) {
+        this.emaFastK.setPeriod(period);
+    }
+
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
     }
 
     public int getFastKElemsSize() {

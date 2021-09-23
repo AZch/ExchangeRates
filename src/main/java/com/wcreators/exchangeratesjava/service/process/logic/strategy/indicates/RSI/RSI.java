@@ -75,4 +75,9 @@ public class RSI implements RsiIndicator {
     public Date getTime(int index) {
         return elems.get(index).getTime();
     }
+
+    public void setPeriod(int period) {
+        this.smmaU.setPeriod(period);
+        this.smmaD.setPeriod(period);
+    }
 }

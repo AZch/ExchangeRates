@@ -29,7 +29,7 @@ class STOCHTest {
         int maxMinutes = 1000;
         List<CupPoint> cupPoints = CupPointsGenerator.generate(maxMinutes);
         List<Rate> rates = RatesGenerator.generate(cupPoints);
-        StochGenerator.StochData stochData = StochGenerator.generate(cupPoints, stoch.getPeriodsHigh(), stoch.getPeriodsLow(), stoch.getPeriodsLow());
+        StochGenerator.StochData stochData = StochGenerator.generate(cupPoints, stoch.getPeriodFastK(), stoch.getPeriodSlowD(), stoch.getPeriodSlowD());
 
         for (Rate rate : rates) {
             Optional<CupPoint> optionalCupPoint = cup.addValue(rate);

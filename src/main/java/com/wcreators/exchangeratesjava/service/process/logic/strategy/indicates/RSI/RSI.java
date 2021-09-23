@@ -1,66 +1,78 @@
 package com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.RSI;
 
-import com.wcreators.exchangeratesjava.model.Rate;
+import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.Point;
 import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.SMMA.SMMA;
-import com.wcreators.exchangeratesjava.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
-
-import static java.lang.Math.abs;
 
 @Service
 @RequiredArgsConstructor
 @Scope("prototype")
-public class RSI {
+public class RSI implements RsiIndicator {
 
-    private final DateUtils dateUtils;
-    private final List<Elem> elems = new LinkedList<>();
-    private Elem current;
     private final SMMA smmaU;
     private final SMMA smmaD;
-    private final double e = 0.0000001;
 
+    private final List<Point> elems = new LinkedList<>();
+    private double previousValue = 0D;
+
+    @Override
+    public void addPoint(Point point) {
+        Date date = point.getTime();
+        double value = point.getValue();
+        if (smmaU.getElemsSize() == 0) {
+            smmaU.addPoint(0D, date);
+            smmaD.addPoint(0D, date);
+        } else {
+            if (value > previousValue) {
+                smmaU.addPoint(value - previousValue, date);
+                smmaD.addPoint(0D, date);
+            } else if (value < previousValue) {
+                smmaU.addPoint(0D, date);
+                smmaD.addPoint(previousValue - value, date);
+            } else {
+                smmaU.addPoint(0D, date);
+                smmaD.addPoint(0D, date);
+            }
+        }
+        previousValue = value;
+
+        double lastSmmaDValue = smmaD.getValue(smmaD.getElemsSize() - 1);
+        double lastSmmaUValue = smmaU.getValue(smmaU.getElemsSize() - 1);
+        if (lastSmmaDValue == 0) {
+            elems.add(
+                    Point.builder()
+                            .time(date)
+                            .value(100D)
+                            .build()
+            );
+        } else {
+            elems.add(
+                    Point.builder()
+                            .time(date)
+                            .value(100 - 100D / (1 + lastSmmaUValue / lastSmmaDValue))
+                            .build()
+            );
+        }
+    }
+
+    @Override
     public int getElemsSize() {
         return elems.size();
     }
 
-    private final Function<Rate, Elem> elemFromRate = rate -> Elem.builder()
-//            .point()
-            .build();
-
-    public void addRate(Rate rate) {
-        if (elems.size() == 0 || abs(rate.getSell() - elems.get(elems.size() - 1).getPoint()) < e) {
-            smmaU.addRate(Rate.builder().sell(0D).createdDate(rate.getCreatedDate()).build());
-            smmaD.addRate(Rate.builder().sell(0D).createdDate(rate.getCreatedDate()).build());
-        } else {
-            if (rate.getSell() > elems.get(elems.size() - 1).getPoint()) {
-                smmaU.addRate(Rate.builder().sell(rate.getSell() - elems.get(elems.size() - 1).getPoint()).createdDate(rate.getCreatedDate()).build());
-                smmaD.addRate(Rate.builder().sell(0D).createdDate(rate.getCreatedDate()).build());
-            } else if (rate.getSell() < elems.get(elems.size() - 1).getPoint()) {
-                smmaU.addRate(Rate.builder().sell(0D).createdDate(rate.getCreatedDate()).build());
-                smmaD.addRate(Rate.builder().sell(elems.get(elems.size() - 1).getPoint() - rate.getSell()).createdDate(rate.getCreatedDate()).build());
-            }
-        }
-
-        if (current == null) {
-            current = elemFromRate.apply(rate);
-            return;
-        }
-
-        if (dateUtils.getMinutes(current.getTime()) == dateUtils.getMinutes(rate.getCreatedDate())) {
-            current.addPrice(rate.getSell(), rate.getCreatedDate(), smmaD, smmaU, e, elems);
-        } else {
-            elems.add(current);
-            current = elemFromRate.apply(rate);
-        }
+    @Override
+    public double getValue(int index) {
+        return elems.get(index).getValue();
     }
 
-    public double point(int index) {
-        return elems.get(index).getPoint();
+    @Override
+    public Date getTime(int index) {
+        return elems.get(index).getTime();
     }
 }

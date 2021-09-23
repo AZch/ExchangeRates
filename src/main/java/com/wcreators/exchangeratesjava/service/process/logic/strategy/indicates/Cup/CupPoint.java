@@ -12,7 +12,7 @@ import static java.lang.Math.min;
 @Builder
 @Getter
 @ToString
-public class Elem {
+public class CupPoint {
 
     private double high;
     private double low;

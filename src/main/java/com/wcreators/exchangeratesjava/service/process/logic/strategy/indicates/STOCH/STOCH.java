@@ -49,6 +49,14 @@ public class STOCH {
         return emaSlowD.getValue(index);
     }
 
+    public Date getFastKTime(int index) {
+        return emaFastK.getTime(index);
+    }
+
+    public Date getSlowDTime(int index) {
+        return emaSlowD.getTime(index);
+    }
+
     public int getPeriodSlowD() {
         return emaSlowD.getPeriod();
     }

@@ -4,10 +4,10 @@ import com.wcreators.exchangeratesjava.model.Rate;
 
 import java.util.List;
 
-public interface ProcessPortService<T> {
+public interface ProcessPortService<T, U> {
 
     List<Rate> receiveRates(T event);
 
-    void sendAction(List<Rate> rate);
+    void sendAction(U action);
 
 }

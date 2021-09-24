@@ -1,6 +1,7 @@
 package com.wcreators.exchangeratesjava.service.process.logic.strategy;
 
 import com.wcreators.exchangeratesjava.model.Rate;
+import com.wcreators.exchangeratesjava.model.RateAction;
 import com.wcreators.exchangeratesjava.service.process.logic.ProcessRatesService;
 import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.Cup.Cup;
 import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.Cup.CupPoint;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 // https://www.bestbinar.ru/strategiya-skalpinga-na-1-minute/
@@ -24,6 +26,7 @@ import java.util.Optional;
 public class StrategyOne implements ProcessRatesService {
 
     private final Cup cup;
+    @Qualifier("EMA")
     private final Ema ema;
     private final RSI rsi;
     private final STOCH stoch;
@@ -40,7 +43,7 @@ public class StrategyOne implements ProcessRatesService {
     }
 
     @Override
-    public Optional<Rate> addRate(Rate rate) {
+    public Optional<RateAction> addRate(Rate rate) {
 
         Optional<CupPoint> optionalCupPoint = cup.addValue(rate);
         if (optionalCupPoint.isPresent()) {
@@ -50,19 +53,24 @@ public class StrategyOne implements ProcessRatesService {
             rsi.addPoint(Point.builder().value(cupPoint.getClose()).time(cupPoint.getEnd()).build());
             stoch.update();
 
-            boolean isSuccess = false;
             if (testStrategyCall()) {
                 log.info("Need try to buy with {}, check this and after 5 min value", rate);
-                isSuccess = true;
+                return Optional.of(
+                        RateAction.builder()
+                                .rate(rate)
+                                .action("try to buy (call)")
+                                .build()
+                );
             }
 
             if (testStrategyPut()) {
                 log.info("Need try to sell with {}, check this and after 5 min value", rate);
-                isSuccess = true;
-            }
-
-            if (isSuccess) {
-                return Optional.of(rate);
+                return Optional.of(
+                        RateAction.builder()
+                            .rate(rate)
+                            .action("try to sell (put)")
+                            .build()
+                    );
             }
         }
 

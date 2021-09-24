@@ -1,7 +1,9 @@
 package com.wcreators.exchangeratesjava.service.process.adapter;
 
+import com.wcreators.exchangeratesjava.event.SpringActionableRateEvent;
 import com.wcreators.exchangeratesjava.event.SpringRatesEvent;
 import com.wcreators.exchangeratesjava.model.Rate;
+import com.wcreators.exchangeratesjava.model.RateAction;
 import com.wcreators.exchangeratesjava.service.process.logic.ProcessRatesService;
 import com.wcreators.exchangeratesjava.service.process.port.ProcessPortService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +24,7 @@ public class ProcessSimpleAdapterSpringEventParsedForexService implements Proces
     @Qualifier("strategyOne")
     private final ProcessRatesService processRates;
 
-    @Qualifier("springEventParsedForexProcessPortService")
-    private final ProcessPortService<SpringRatesEvent> port;
+    private final ProcessPortService<SpringRatesEvent, SpringActionableRateEvent> port;
 
     @Override
     @EventListener
@@ -31,8 +32,8 @@ public class ProcessSimpleAdapterSpringEventParsedForexService implements Proces
         List<Rate> rates = port.receiveRates(event);
         Optional<Rate> usdEurRate = rates.stream().filter(processRates::isRateForStrategy).findFirst();
         if (usdEurRate.isPresent()) {
-            Optional<Rate> processedRate = processRates.addRate(usdEurRate.get());
-            processedRate.ifPresent(rate -> port.sendAction(List.of(rate)));
+            Optional<RateAction> processedRate = processRates.addRate(usdEurRate.get());
+            processedRate.ifPresent(value -> port.sendAction(SpringActionableRateEvent.builder().rate(value.getRate()).action(value.getAction()).build()));
         } else {
             log.warn("No have eur/usd pair in income rates");
         }

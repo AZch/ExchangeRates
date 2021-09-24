@@ -3,6 +3,7 @@ package com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates
 
 import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.Point;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Qualifier("EMA")
 @Scope("prototype")
 public class Ema implements EmaIndicator {
 
@@ -48,6 +50,9 @@ public class Ema implements EmaIndicator {
                                 .build()
                 );
             }
+        }
+        if (elems.size() > 60) {
+            elems.subList(0, 30).clear();
         }
     }
 

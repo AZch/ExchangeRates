@@ -59,6 +59,9 @@ public class RSI implements RsiIndicator {
                             .build()
             );
         }
+        if (elems.size() > 60) {
+            elems.subList(0, 30).clear();
+        }
     }
 
     @Override

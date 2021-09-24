@@ -2,11 +2,13 @@ package com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates
 
 import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.EMA.Ema;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Qualifier("SMMA")
 @Scope("prototype")
 public class SMMA extends Ema {
     @Override

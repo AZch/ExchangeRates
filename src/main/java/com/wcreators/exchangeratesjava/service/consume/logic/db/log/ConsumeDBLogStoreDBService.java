@@ -1,4 +1,4 @@
-package com.wcreators.exchangeratesjava.service.consume.logic;
+package com.wcreators.exchangeratesjava.service.consume.logic.db.log;
 
 import com.wcreators.exchangeratesjava.constant.Resource;
 import com.wcreators.exchangeratesjava.model.Rate;
@@ -11,8 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Qualifier("consumeStoreDBService")
-public class ConsumeStoreDBService implements ConsumeService {
+public class ConsumeDBLogStoreDBService implements ConsumeDBLogService {
 
     private final RateEntityService rateEntityService;
 

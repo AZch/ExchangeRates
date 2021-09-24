@@ -41,6 +41,9 @@ public class Cup implements CupIndicator {
         Optional<CupPoint> addedPoint = Optional.of(current);
         elems.add(current);
         current = elemFromRate.apply(rate);
+        if (elems.size() > 60) {
+            elems.subList(0, 30).clear();
+        }
 
         return addedPoint;
     }

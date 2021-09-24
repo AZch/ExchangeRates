@@ -5,12 +5,11 @@ import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.
 import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.EMA.Ema;
 import com.wcreators.exchangeratesjava.service.process.logic.strategy.indicates.Point;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
-import static java.lang.Math.max;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,9 @@ import static java.lang.Math.max;
 public class STOCH {
 
     private final Cup cup;
+    @Qualifier("EMA")
     private final Ema emaFastK;
+    @Qualifier("EMA")
     private final Ema emaSlowD;
     private int period = 5;
 

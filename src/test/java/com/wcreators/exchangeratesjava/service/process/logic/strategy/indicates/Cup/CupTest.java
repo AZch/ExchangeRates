@@ -17,7 +17,7 @@ class CupTest {
 
     @Test
     void loadData() {
-        int maxMinutes = 1000;
+        int maxMinutes = 50;
         List<CupPoint> cupPoints = CupPointsGenerator.generate(maxMinutes);
         List<Rate> rates = RatesGenerator.generate(cupPoints);
 

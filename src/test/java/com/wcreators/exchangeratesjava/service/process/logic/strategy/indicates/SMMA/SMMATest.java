@@ -15,7 +15,7 @@ class SMMATest {
 
     @Test
     public void loadData() {
-        int maxMinutes = 1000;
+        int maxMinutes = 50;
         List<Point> points = PointsGenerator.generate(maxMinutes);
         List<Point> elems = SmmaGenerator.generate(points, smma.getPeriod());
 

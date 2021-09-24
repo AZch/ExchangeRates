@@ -26,7 +26,7 @@ class STOCHTest {
 
     @Test
     public void loadData() {
-        int maxMinutes = 1000;
+        int maxMinutes = 50;
         List<CupPoint> cupPoints = CupPointsGenerator.generate(maxMinutes);
         List<Rate> rates = RatesGenerator.generate(cupPoints);
         StochGenerator.StochData stochData = StochGenerator.generate(cupPoints, stoch.getPeriodFastK(), stoch.getPeriodSlowD(), stoch.getPeriodSlowD());

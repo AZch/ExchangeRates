@@ -18,7 +18,7 @@ class RSITest {
 
     @Test
     public void loadData() {
-        int maxMinutes = 1000;
+        int maxMinutes = 50;
         List<Point> points = PointsGenerator.generate(maxMinutes);
         List<Point> elems = RsiGenerator.generate(points, smmaU.getPeriod());
 

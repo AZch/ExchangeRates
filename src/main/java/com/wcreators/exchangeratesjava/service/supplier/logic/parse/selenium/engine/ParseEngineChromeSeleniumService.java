@@ -30,6 +30,8 @@ public class ParseEngineChromeSeleniumService implements ParseEngineSeleniumServ
 
         options.setHeadless(seleniumConfig.isHeadless());
         options.addArguments("--start-maximized");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
         driver = new ChromeDriver(options);
         driver.manage().window().setSize(new Dimension(2000, 4000));

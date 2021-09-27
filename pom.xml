@@ -16,6 +16,15 @@
     <properties>
         <java.version>11</java.version>
     </properties>
+
+    <modules>
+        <module>common/ObjectModels</module>
+        <module>common/Utils</module>
+        <module>common/KafkaStarter</module>
+        <module>producers/parsers/ForexParser</module>
+        <module>producers/parsers/SeleniumEngineStarter</module>
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

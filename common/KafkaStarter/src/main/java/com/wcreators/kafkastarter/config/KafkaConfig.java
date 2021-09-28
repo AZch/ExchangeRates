@@ -1,6 +1,5 @@
 package com.wcreators.kafkastarter.config;
 
-import com.wcreators.kafkastarter.consumer.Consumer;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

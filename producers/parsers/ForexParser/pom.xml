@@ -27,11 +27,6 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>com.wcreators</groupId>
             <artifactId>SeleniumEngineStarter</artifactId>
             <version>${project.version}</version>

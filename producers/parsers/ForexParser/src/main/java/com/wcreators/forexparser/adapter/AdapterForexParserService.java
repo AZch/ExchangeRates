@@ -2,7 +2,6 @@ package com.wcreators.forexparser.adapter;
 
 import com.wcreators.forexparser.parser.ParseRateService;
 import com.wcreators.forexparser.port.PortService;
-import com.wcreators.objectmodels.constant.Resource;
 import com.wcreators.objectmodels.model.Rate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,9 @@ public class AdapterForexParserService implements AdapterService {
     @Scheduled(fixedDelay = 100)
     public void adaptEvent() {
         List<Rate> rates = parseRates();
-        portService.sendParsedRates(rates, parseRateService.getResource(), parseRateService.getResourceAction());
+        rates.stream()
+                .filter(rate -> rate.getName().equals("EUR/USD"))
+                .forEach(portService::sendParsedRate);
     }
 
     private List<Rate> parseRates() {

@@ -1,7 +1,7 @@
-package com.wcreators.forexparser.port;
+package com.wcreators.strategyemarsistoch.port;
 
 import com.wcreators.kafkastarter.topics.ProducerService;
-import com.wcreators.objectmodels.model.Rate;
+import com.wcreators.objectmodels.model.RateAction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class KafkaPortService implements PortService {
 
-    private final ProducerService<Rate> producerService;
+    private final ProducerService<RateAction> producerService;
 
     @Override
-    public void sendParsedRate(Rate rate) {
-        producerService.produce(rate);
+    public void send(RateAction rateAction) {
+        producerService.produce(rateAction);
     }
 }

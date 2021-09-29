@@ -26,7 +26,7 @@ public class AdapterStrategyEventService implements AdapterService {
         Optional<RateAction> optionalRateAction = processRatesService.addRate(rate);
         optionalRateAction.ifPresentOrElse(
                 rateAction -> {
-                    log.info("Send action {}", rateAction);
+                    log.info("Send action {}: {}", rateAction.getRate().getName(), rateAction.getAction());
                     portService.send(rateAction);
                 },
                 () -> log.info("Nothing actions for rate {}", rate)

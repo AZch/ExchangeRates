@@ -25,6 +25,8 @@
         <module>producers/parsers/ForexParser</module>
         <module>producers/parsers/SeleniumEngineStarter</module>
         <module>process/StrategyEmaRsiStoch</module>
+        <module>consumers/StoreActionableRates</module>
+        <module>consumers/StoreParsedRates</module>
     </modules>
 
     <dependencies>

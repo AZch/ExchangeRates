@@ -1,0 +1,18 @@
+selenium:
+  headless: true
+  timeoutSec: 60
+  driver:
+    path: /Users/antonzhuikov/IdeaProjects/ExchangeRatesJava/common/SeleniumEngineStarter/src/main/resources/drivers/chromedriver_mac
+    type: webdriver.chrome.driver
+forex:
+  user:
+    login: wordscreators@gmail.com
+    password: WOrdscreators
+spring:
+  kafka:
+    bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
+    consumer:
+      auto-offset-reset: earliest
+      group-id: example
+    producer:
+      client-id: example

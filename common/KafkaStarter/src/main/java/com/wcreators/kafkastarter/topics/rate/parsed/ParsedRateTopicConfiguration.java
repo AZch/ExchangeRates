@@ -58,7 +58,7 @@ public class ParsedRateTopicConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, RateDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerParsedRateFactory());
         factory.setBatchListener(false);
-//        factory.setMessageConverter(new StringJsonMessageConverter());
+        factory.setMessageConverter(new StringJsonMessageConverter());
         return factory;
     }
 }

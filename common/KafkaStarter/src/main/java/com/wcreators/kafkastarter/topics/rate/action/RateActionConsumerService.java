@@ -18,7 +18,7 @@ public class RateActionConsumerService implements ConsumerService<RateActionDTO>
     private final ApplicationEventPublisher publisher;
 
     @Override
-    @KafkaListener(id = "ActionRate", topics = {"action.EUR-USD"}, containerFactory = "singleActionRateConsumerFactory")
+    @KafkaListener(id = "ActionRate", topics = {"action.EUR-USD"}, containerFactory = "singleActionRateConsumerFactory", groupId = "2")
     public void consume(RateActionDTO dto) {
         RateAction rateAction = mapper.dtoToModel(dto);
         publisher.publishEvent(rateAction);

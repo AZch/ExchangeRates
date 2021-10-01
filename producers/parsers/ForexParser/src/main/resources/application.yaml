@@ -2,7 +2,7 @@ selenium:
   headless: true
   timeoutSec: 60
   driver:
-    path: /Users/antonzhuikov/IdeaProjects/ExchangeRatesJava/producers/parsers/SeleniumEngineStarter/src/main/resources/drivers/chromedriver_mac
+    path: /Users/antonzhuikov/IdeaProjects/ExchangeRatesJava/common/SeleniumEngineStarter/src/main/resources/drivers/chromedriver_mac
     type: webdriver.chrome.driver
 forex:
   user:

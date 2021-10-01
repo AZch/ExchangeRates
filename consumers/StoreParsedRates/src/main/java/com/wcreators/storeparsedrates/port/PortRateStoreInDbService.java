@@ -21,13 +21,13 @@ public class PortRateStoreInDbService {
 
     @EventListener
     public void storeParsedRate(Rate rate) {
+        log.info("Storing parsed rate {}", rate);
         rateEntityService.save(rate, Resource.FOREX);
-        log.info("Stored parsed rate {}", rate);
     }
 
     @EventListener(RateAction.class)
     public void storeActionableRate(RateAction rateAction) {
+        log.info("Storing action {} for rate {}", rateAction.getAction(), rateAction.getRate());
         rateActionService.save(rateAction);
-        log.info("Stored action {} for rate {}", rateAction.getAction(), rateAction.getRate());
     }
 }

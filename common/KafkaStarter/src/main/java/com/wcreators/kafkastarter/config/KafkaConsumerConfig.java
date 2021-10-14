@@ -8,4 +8,5 @@ import lombok.Setter;
 public class KafkaConsumerConfig {
     private String autoOffsetReset;
     private String groupId;
+    private String clientId;
 }

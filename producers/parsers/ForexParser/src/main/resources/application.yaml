@@ -10,9 +10,27 @@ forex:
     password: WOrdscreators
 spring:
   kafka:
+    topics:
+      parsed-eur-usd:
+        consumer: false
+        producer: true
+      action-eur-usd:
+        consumer: false
+        producer: false
     bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
-    consumer:
-      auto-offset-reset: earliest
-      group-id: example
+    properties:
+      sasl:
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username=${kafka_username:'admin'} password=${kafka_password:'admin-secret'};
+        mechanism: PLAIN
+      security:
+        protocol: SASL_PLAINTEXT
     producer:
-      client-id: example
+      client-id: forexProducer
+      retries: 2
+    jaas:
+      enabled: true
+    listener:
+      poll-timeout: 1800000
+      concurrency: 1
+      ack-mode: manual_immediate

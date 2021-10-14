@@ -12,6 +12,17 @@
 8. CREATE DATABASE test_db;
 9. add entities
 
-## App
-1. docker build -t test -f deployment/docker/app.Dockerfile .
-2. docker run --name test --network=host --user chrome --privileged -d test   
+## Kafka + Zookeeper
+1. docker compose -f deployment/docker/compose-kafka.yaml up -d
+
+## Forex Producer
+1. docker build -t fp -f deployment/docker/forexProducer.Dockerfile .
+2. docker run --name fp --network=host --user chrome --privileged -d fp
+
+## Ema rsi stoch strategy
+1. docker build -t ers -f deployment/docker/emaRsiStochStrategy.Dockerfile .
+2. docker run --name ers --network=host -d ers
+
+## Stored parsed and action rate strategy 
+1. docker build -t spar -f deployment/docker/storedParsedRates.Dockerfile .
+2. docker run --name spar --network=host -d spar

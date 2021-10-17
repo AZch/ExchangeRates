@@ -29,13 +29,13 @@ public class RateActionTopicConfiguration implements ConfigurationService {
 
     private final KafkaConfig config;
 
-//    @Bean
-//    public NewTopic actionTopic() {
-//        return TopicBuilder.name("action.EUR-USD")
-//                .partitions(10)
-//                .replicas(1)
-//                .build();
-//    }
+    @Bean
+    public NewTopic actionTopic() {
+        return TopicBuilder.name("action.EUR-USD")
+                .partitions(3)
+                .replicas(1)
+                .build();
+    }
 
     @Bean
     public KafkaTemplate<String, RateActionDTO> kafkaRateActionTemplate() {

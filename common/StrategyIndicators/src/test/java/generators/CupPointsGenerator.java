@@ -1,6 +1,6 @@
 package generators;
 
-import com.wcreators.strategyindicators.services.Cup.CupPoint;
+import com.wcreators.strategyindicators.models.CupPoint;
 
 import java.util.*;
 

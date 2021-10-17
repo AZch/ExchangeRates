@@ -25,7 +25,7 @@ public class PortRateStoreInDbService {
         rateEntityService.save(rate, Resource.FOREX);
     }
 
-    @EventListener(RateAction.class)
+    @EventListener
     public void storeActionableRate(RateAction rateAction) {
         log.info("Storing action {} for rate {}", rateAction.getAction(), rateAction.getRate());
         rateActionService.save(rateAction);

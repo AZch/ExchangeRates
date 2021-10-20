@@ -1,7 +1,5 @@
 FROM openjdk:11-slim-buster as prepare
 
-ENV kafka_bootstrap_servers=192.168.0.196:9092
-
 # Install deps + add Chrome Stable + purge all the things
 RUN apt-get update && apt-get install -y \
 	apt-transport-https \

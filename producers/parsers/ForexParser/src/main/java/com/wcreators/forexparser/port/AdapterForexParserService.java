@@ -21,7 +21,7 @@ public class AdapterForexParserService implements AdapterService {
     private final ProducerService<Rate> producerService;
 
     @Override
-    @Scheduled(fixedDelay = 100)
+    @Scheduled(fixedDelay = 700)
     public void adaptEvent() {
         List<Rate> rates = parseRates();
         rates.stream()

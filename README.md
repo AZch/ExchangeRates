@@ -7,7 +7,7 @@
 2. docker run --name db --env="MYSQL_ROOT_HOST=%" --publish 3306:3306 -d db
 
 ## Kafka + Zookeeper
-1. docker compose -f deployment/docker/brokers/kafka/compose.yaml up -d
+1. docker-compose -f deployment/docker/brokers/kafka/compose.yaml up -d
 2. docker-compose exec broker kafka-topics \
    --create \
    --bootstrap-server localhost:9092 \

@@ -34,6 +34,7 @@ public class ParseForexRateServiceSelenium implements ParseRateService {
     public void init() {
         login();
         openRates();
+        loadSpecificRate("EUR/USD");
     }
 
     @Override
@@ -87,6 +88,15 @@ public class ParseForexRateServiceSelenium implements ParseRateService {
         parseEngine.getWait()
                 .until(presenceOfElementLocated(By.xpath(ratesMenuXpath)))
                 .click();
+        loader.waitLoader();
+        sleep(5000);
+    }
+
+    private void loadSpecificRate(String rate) {
+        String placeHolderFilterXpath = "//input[@placeholder='Filter markets']";
+        parseEngine.getWait()
+                .until(presenceOfElementLocated(By.xpath(placeHolderFilterXpath)))
+                .sendKeys(rate);
         loader.waitLoader();
         sleep(5000);
     }

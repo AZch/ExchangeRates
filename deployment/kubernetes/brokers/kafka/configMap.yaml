@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kafka-server-jaas
+  namespace: default
+data:
+  kafka_server_jaas.confi: |
+    KafkaServer {
+      org.apache.kafka.common.security.plain.PlainLoginModule required
+      username="${USERNAME}"
+      password="${PASSWORD}"
+      user_admin="${USER_ADMIN}";
+    };
+    Client {};

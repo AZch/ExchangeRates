@@ -1,0 +1,63 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: forex-parser
+  labels:
+    app: forex-parser
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forex-parser
+  template:
+    metadata:
+      labels:
+        app: forex-parser
+    spec:
+      containers:
+        - name: forex-parser
+          image: fp
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: emi-rsi-stoch-strategy
+  labels:
+    app: emi-rsi-stoch
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emi-rsi-stoch
+  template:
+    metadata:
+      labels:
+        app: emi-rsi-stoch
+    spec:
+      containers:
+        - name: emi-rsi-stoch-strategy
+          image: ers
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: store-rates
+  labels:
+    app: store-rates
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: store-rates
+  template:
+    metadata:
+      labels:
+        app: store-rates
+    spec:
+      containers:
+        - name: store-rates
+          image: spar
+

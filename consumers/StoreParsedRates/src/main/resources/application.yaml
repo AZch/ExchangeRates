@@ -4,6 +4,9 @@ spring:
       parsed-eur-usd:
         consumer: true
         producer: false
+      parsed-cup-eur-usd:
+        consumer: true
+        producer: false
       action-eur-usd:
         consumer: true
         producer: false

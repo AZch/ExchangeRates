@@ -3,9 +3,10 @@ package com.wcreators.kafkastarter.mappers;
 import com.wcreators.kafkastarter.dto.RateDTO;
 import com.wcreators.objectmodels.model.Rate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class RateToDtoMapper {
+@Service
+public class RateToDtoMapper implements Mapper<Rate, RateDTO> {
 
     public RateDTO modelToDto(Rate rate) {
         return RateDTO.builder()

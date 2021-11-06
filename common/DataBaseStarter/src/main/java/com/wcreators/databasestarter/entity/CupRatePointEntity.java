@@ -1,5 +1,6 @@
 package com.wcreators.databasestarter.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,12 +10,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "rate_action")
+@Table(name = "cup_rate_point")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RateActionEntity {
+public class CupRatePointEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +27,21 @@ public class RateActionEntity {
     @Column(name = "minor")
     private String minor;
 
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "high")
+    private Double high;
 
-    @Column(name = "action")
-    private String action;
+    @Column(name = "low")
+    private Double low;
+
+    @Column(name = "open")
+    private Double open;
+
+    @Column(name = "close")
+    private Double close;
+
+    @Column(name = "start")
+    private Date start;
+
+    @Column(name = "end")
+    private Date end;
 }

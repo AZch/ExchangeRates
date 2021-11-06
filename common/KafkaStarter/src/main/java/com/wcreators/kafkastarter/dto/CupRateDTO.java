@@ -11,9 +11,13 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RateActionDTO {
+public class CupRateDTO {
     private String major;
     private String minor;
-    private String action;
-    private Date created;
+    private double high;
+    private double low;
+    private double open;
+    private double close;
+    private Date start;
+    private Date end;
 }

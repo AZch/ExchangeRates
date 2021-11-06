@@ -46,6 +46,11 @@
             <artifactId>KafkaStarter</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.wcreators</groupId>
+            <artifactId>StrategyIndicators</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

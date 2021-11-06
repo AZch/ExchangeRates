@@ -2,7 +2,10 @@ package com.wcreators.forexparser.port;
 
 import com.wcreators.forexparser.parser.ParseRateService;
 import com.wcreators.kafkastarter.topics.ProducerService;
+import com.wcreators.objectmodels.model.CupRatePoint;
 import com.wcreators.objectmodels.model.Rate;
+import com.wcreators.strategyindicators.models.CupPoint;
+import com.wcreators.strategyindicators.services.cup.CupIndicator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +22,9 @@ public class AdapterForexParserService implements AdapterService {
 
     private final ParseRateService parseRateService;
 
-    private final ProducerService<Rate> producerService;
+    private final ProducerService<CupRatePoint> producerService;
+    
+    private final CupIndicator cup;
 
     @Override
     @Scheduled(fixedDelay = 700)
@@ -26,6 +32,20 @@ public class AdapterForexParserService implements AdapterService {
         List<Rate> rates = parseRates();
         rates.stream()
                 .filter(rate -> rate.getName().equals("EUR/USD"))
+                .map(cup::addPoint)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .peek(point -> log.debug("Parsed cup rate {}", point))
+                .map(point -> CupRatePoint.builder()
+                        .major("EUR")
+                        .minor("USD")
+                        .start(point.getStart())
+                        .end(point.getEnd())
+                        .open(point.getOpen())
+                        .close(point.getClose())
+                        .high(point.getHigh())
+                        .low(point.getLow())
+                    .build())
                 .forEach(producerService::produce);
     }
 

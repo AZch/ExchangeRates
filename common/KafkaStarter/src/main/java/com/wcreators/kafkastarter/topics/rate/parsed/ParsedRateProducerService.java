@@ -1,6 +1,7 @@
 package com.wcreators.kafkastarter.topics.rate.parsed;
 
 import com.wcreators.kafkastarter.dto.RateDTO;
+import com.wcreators.kafkastarter.mappers.Mapper;
 import com.wcreators.kafkastarter.mappers.RateToDtoMapper;
 import com.wcreators.kafkastarter.topics.ProducerService;
 import com.wcreators.objectmodels.model.Rate;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class ParsedRateProducerService implements ProducerService<Rate> {
 
     private final KafkaTemplate<String, RateDTO> template;
-    private final RateToDtoMapper mapper;
+    private final Mapper<Rate, RateDTO> mapper;
 
     @Override
     public String topicName(Rate model) {

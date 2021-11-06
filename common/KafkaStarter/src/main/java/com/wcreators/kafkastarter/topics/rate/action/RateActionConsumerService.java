@@ -1,6 +1,7 @@
 package com.wcreators.kafkastarter.topics.rate.action;
 
 import com.wcreators.kafkastarter.dto.RateActionDTO;
+import com.wcreators.kafkastarter.mappers.Mapper;
 import com.wcreators.kafkastarter.mappers.RateActionToDtoMapper;
 import com.wcreators.kafkastarter.topics.ConsumerService;
 import com.wcreators.objectmodels.model.RateAction;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RateActionConsumerService implements ConsumerService<RateActionDTO> {
 
-    private final RateActionToDtoMapper mapper;
+    private final Mapper<RateAction, RateActionDTO> mapper;
 
     private final ApplicationEventPublisher publisher;
 

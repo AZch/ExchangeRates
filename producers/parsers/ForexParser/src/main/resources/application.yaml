@@ -13,10 +13,13 @@ spring:
     topics:
       parsed-eur-usd:
         consumer: false
-        producer: true
+        producer: false
       action-eur-usd:
         consumer: false
         producer: false
+      parsed-cup-eur-usd:
+        consumer: false
+        producer: true
     bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
     properties:
       sasl:

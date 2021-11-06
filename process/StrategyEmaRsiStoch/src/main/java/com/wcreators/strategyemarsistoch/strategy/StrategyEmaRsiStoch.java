@@ -23,16 +23,20 @@ public class StrategyEmaRsiStoch implements ProcessRatesService {
     private final EmaIndicator ema;
     private final RsiIndicator rsi;
     private final StochIndicator stoch;
+    private final CupIndicator cup;
 
     private TempStrategyData data;
 
     public StrategyEmaRsiStoch(
             @Qualifier("EMA") EmaIndicator ema,
-            @Qualifier("RSI") RsiIndicator rsi, @Qualifier("STOCH") StochIndicator stoch
+            @Qualifier("RSI") RsiIndicator rsi,
+            @Qualifier("STOCH") StochIndicator stoch,
+            CupIndicator cup
     ) {
         this.ema = ema;
         this.rsi = rsi;
         this.stoch = stoch;
+        this.cup = cup;
     }
 
     @PostConstruct
@@ -47,6 +51,7 @@ public class StrategyEmaRsiStoch implements ProcessRatesService {
     @Override
     public Optional<String> addRate(CupPoint cupPoint) {
 
+        cup.addCupPoint(cupPoint);
         Point emaPoint = Point.builder().value(cupPoint.getClose()).time(cupPoint.getEnd()).build();
         ema.addPoint(emaPoint);
         Point rsiPoint = Point.builder().value(cupPoint.getClose()).time(cupPoint.getEnd()).build();

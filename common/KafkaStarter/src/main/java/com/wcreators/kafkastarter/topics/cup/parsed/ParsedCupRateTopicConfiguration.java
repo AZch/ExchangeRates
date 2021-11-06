@@ -25,7 +25,7 @@ public class ParsedCupRateTopicConfiguration implements ConfigurationService {
     @Bean
     public NewTopic parsedCupTopic() {
         return TopicBuilder.name("parsed.CUP-EUR-USD")
-                .partitions(3)
+                .partitions(1)
                 .replicas(1)
                 .build();
     }

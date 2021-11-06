@@ -34,7 +34,7 @@ public class ParsedRateTopicConfiguration implements ConfigurationService {
     @Bean
     public NewTopic parsedTopic() {
         return TopicBuilder.name("parsed.EUR-USD")
-                .partitions(3)
+                .partitions(1)
                 .replicas(1)
                 .build();
     }

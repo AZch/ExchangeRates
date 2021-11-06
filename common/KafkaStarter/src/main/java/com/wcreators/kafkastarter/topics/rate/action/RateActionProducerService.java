@@ -1,6 +1,7 @@
 package com.wcreators.kafkastarter.topics.rate.action;
 
 import com.wcreators.kafkastarter.dto.RateActionDTO;
+import com.wcreators.kafkastarter.mappers.Mapper;
 import com.wcreators.kafkastarter.mappers.RateActionToDtoMapper;
 import com.wcreators.kafkastarter.topics.ProducerService;
 import com.wcreators.objectmodels.model.RateAction;
@@ -15,11 +16,11 @@ import org.springframework.stereotype.Service;
 public class RateActionProducerService implements ProducerService<RateAction> {
 
     private final KafkaTemplate<String, RateActionDTO> template;
-    private final RateActionToDtoMapper mapper;
+    private final Mapper<RateAction, RateActionDTO> mapper;
 
     @Override
     public String topicName(RateAction model) {
-        return String.format("action.%s-%s", model.getRate().getMajor(), model.getRate().getMinor());
+        return String.format("action.%s-%s", model.getMajor(), model.getMinor());
     }
 
     @Override

@@ -9,11 +9,9 @@ public class RateActionAndEntityMapper{
 
     public RateActionEntity modelToEntity(RateAction model) {
         return RateActionEntity.builder()
-                .major(model.getRate().getMajor())
-                .minor(model.getRate().getMinor())
-                .sell(model.getRate().getSell())
-                .buy(model.getRate().getBuy())
-                .createdDate(model.getRate().getCreatedDate())
+                .major(model.getMajor())
+                .minor(model.getMinor())
+                .date(model.getCreated())
                 .action(model.getAction())
                 .build();
     }

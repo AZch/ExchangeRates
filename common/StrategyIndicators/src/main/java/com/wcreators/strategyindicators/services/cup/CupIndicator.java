@@ -7,4 +7,5 @@ import com.wcreators.strategyindicators.services.Indicator;
 import java.util.Optional;
 
 public interface CupIndicator extends Indicator<Rate, Optional<CupPoint>, CupUtils> {
+    void addCupPoint(CupPoint cupPoint);
 }

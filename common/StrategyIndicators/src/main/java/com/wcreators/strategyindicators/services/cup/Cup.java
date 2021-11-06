@@ -51,6 +51,14 @@ public class Cup implements CupIndicator {
     }
 
     @Override
+    public void addCupPoint(CupPoint cupPoint) {
+        elems.add(cupPoint);
+        if (elems.size() > 60) {
+            elems.subList(0, 30).clear();
+        }
+    }
+
+    @Override
     public CupUtils getUtils() {
         return utils;
     }

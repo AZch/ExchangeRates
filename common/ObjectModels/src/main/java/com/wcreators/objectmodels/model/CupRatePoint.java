@@ -9,9 +9,13 @@ import java.util.Date;
 @Getter
 @ToString
 @Builder
-public class RateAction {
+public class CupRatePoint {
     private String major;
     private String minor;
-    private String action;
-    private Date created;
+    private double high;
+    private double low;
+    private double open;
+    private double close;
+    private Date start;
+    private Date end;
 }

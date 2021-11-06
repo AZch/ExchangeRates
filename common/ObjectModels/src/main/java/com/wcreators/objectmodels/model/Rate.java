@@ -1,6 +1,5 @@
 package com.wcreators.objectmodels.model;
 
-import com.wcreators.objectmodels.constant.Resource;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

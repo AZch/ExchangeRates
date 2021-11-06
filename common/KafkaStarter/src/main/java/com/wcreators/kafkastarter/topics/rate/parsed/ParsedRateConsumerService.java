@@ -1,6 +1,7 @@
 package com.wcreators.kafkastarter.topics.rate.parsed;
 
 import com.wcreators.kafkastarter.dto.RateDTO;
+import com.wcreators.kafkastarter.mappers.Mapper;
 import com.wcreators.kafkastarter.mappers.RateToDtoMapper;
 import com.wcreators.kafkastarter.topics.ConsumerService;
 import com.wcreators.objectmodels.model.Rate;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ParsedRateConsumerService implements ConsumerService<RateDTO> {
 
-    private final RateToDtoMapper mapper;
+    private final Mapper<Rate, RateDTO> mapper;
 
     private final ApplicationEventPublisher publisher;
 

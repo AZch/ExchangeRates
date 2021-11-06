@@ -32,7 +32,7 @@ public class RateActionTopicConfiguration implements ConfigurationService {
     @Bean
     public NewTopic actionTopic() {
         return TopicBuilder.name("action.EUR-USD")
-                .partitions(3)
+                .partitions(1)
                 .replicas(1)
                 .build();
     }

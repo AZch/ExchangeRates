@@ -4,22 +4,14 @@ import com.wcreators.kafkastarter.config.KafkaConfig;
 import com.wcreators.kafkastarter.dto.RateActionDTO;
 import com.wcreators.kafkastarter.topics.ConfigurationService;
 import lombok.RequiredArgsConstructor;
-import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.config.SaslConfigs;
-import org.apache.kafka.common.security.plain.PlainLoginModule;
-import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.*;
-import org.springframework.kafka.support.serializer.JsonDeserializer;
-import org.springframework.kafka.support.serializer.JsonSerializer;
+import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 
 import java.util.Map;
 
@@ -51,6 +43,7 @@ public class RateActionTopicConfiguration implements ConfigurationService {
         ConcurrentKafkaListenerContainerFactory<String, RateActionDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         factory.setBatchListener(false);
+        factory.setMessageConverter(new StringJsonMessageConverter());
         return factory;
     }
 }

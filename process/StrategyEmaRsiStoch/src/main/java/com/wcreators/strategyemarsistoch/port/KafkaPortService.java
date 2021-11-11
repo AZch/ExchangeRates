@@ -49,6 +49,8 @@ public class KafkaPortService implements PortService {
                             .minor(cupRatePoint.getMinor())
                             .created(new Date())
                             .action(action)
+                            .rate(cupRatePoint.getClose())
+                            .strategy(processRatesService.getStrategy())
                             .build());
                 },
                 () -> log.info("Nothing actions for rate {}", cupRatePoint)

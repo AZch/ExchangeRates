@@ -16,4 +16,6 @@ public class RateActionDTO {
     private String minor;
     private String action;
     private Date created;
+    private String strategy;
+    private double rate;
 }

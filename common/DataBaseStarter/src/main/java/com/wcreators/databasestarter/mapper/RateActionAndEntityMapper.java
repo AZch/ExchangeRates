@@ -13,6 +13,8 @@ public class RateActionAndEntityMapper{
                 .minor(model.getMinor())
                 .date(model.getCreated())
                 .action(model.getAction())
+                .strategy(model.getStrategy().getType())
+                .rate(model.getRate())
                 .build();
     }
 

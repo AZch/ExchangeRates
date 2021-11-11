@@ -1,9 +1,9 @@
 package com.wcreators.strategyemarsistoch.strategy;
 
+import com.wcreators.objectmodels.constant.Strategy;
 import com.wcreators.objectmodels.model.Rate;
-import com.wcreators.objectmodels.model.RateAction;
-import com.wcreators.strategyindicators.models.Point;
 import com.wcreators.strategyindicators.models.CupPoint;
+import com.wcreators.strategyindicators.models.Point;
 import com.wcreators.strategyindicators.services.cup.CupIndicator;
 import com.wcreators.strategyindicators.services.ema.EmaIndicator;
 import com.wcreators.strategyindicators.services.rsi.RsiIndicator;
@@ -191,5 +191,10 @@ public class StrategyEmaRsiStoch implements ProcessRatesService {
         public void setLastStochSlowDPoint(Point lastStochSlowDPoint) {
             this.lastStochSlowDPoint = lastStochSlowDPoint;
         }
+    }
+
+    @Override
+    public Strategy getStrategy() {
+        return Strategy.EMA_RSI_STOCH;
     }
 }

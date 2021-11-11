@@ -25,7 +25,7 @@ public class RateActionConsumerService implements ConsumerService<RateActionDTO>
     @Override
     @KafkaListener(topics = {"action.EUR-USD"}, containerFactory = "singleActionRateConsumerFactory")
     public void consume(RateActionDTO dto) {
-        log.info("receive actionad rate");
+        log.info("receive actionad rate {}", dto);
         RateAction rateAction = mapper.dtoToModel(dto);
         publisher.publishEvent(rateAction);
     }

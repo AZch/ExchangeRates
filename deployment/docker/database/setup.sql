@@ -22,6 +22,8 @@ create table if not exists rate_action (
     minor   varchar(5)   not null,
     date    datetime     not null,
     action  varchar(200) not null,
+    strategy varchar(200) not null,
+    rate double not null,
     constraint rate_id_uindex unique (id)
 );
 

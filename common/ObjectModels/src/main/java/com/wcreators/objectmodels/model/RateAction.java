@@ -1,5 +1,6 @@
 package com.wcreators.objectmodels.model;
 
+import com.wcreators.objectmodels.constant.Strategy;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -14,4 +15,6 @@ public class RateAction {
     private String minor;
     private String action;
     private Date created;
+    private Strategy strategy;
+    private double rate;
 }

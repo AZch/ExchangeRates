@@ -31,4 +31,10 @@ public class RateActionEntity {
 
     @Column(name = "action")
     private String action;
+
+    @Column(name = "strategy")
+    private String strategy;
+
+    @Column(name = "rate")
+    private Double rate;
 }

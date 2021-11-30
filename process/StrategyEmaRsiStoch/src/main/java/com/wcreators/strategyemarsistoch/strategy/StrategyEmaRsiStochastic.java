@@ -26,7 +26,7 @@ public class StrategyEmaRsiStochastic implements ProcessRatesService {
     private final StochasticD stochasticD;
 
     public StrategyEmaRsiStochastic() {
-        this.cup = new Cup(new DateUtilsUtilDate());
+        this.cup = new Cup();
         this.ema = new EMA(7);
         this.rsi = new RSI(3);
         this.stochasticK = new StochasticK(6, 3);

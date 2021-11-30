@@ -2,22 +2,18 @@ package com.wcreators.strategyindicators.services.cup;
 
 import com.wcreators.objectmodels.model.Rate;
 import com.wcreators.strategyindicators.models.CupPoint;
-import com.wcreators.strategyindicators.services.Indicator;
+import com.wcreators.strategyindicators.models.Decimal;
+import com.wcreators.strategyindicators.services.storage.StorageIndicator;
 import com.wcreators.utils.date.DateUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.function.Function;
 
-@Service
 @RequiredArgsConstructor
-public class Cup implements CupIndicator {
-
-    private final List<CupPoint> elems = new ArrayList<>();
+public class Cup extends StorageIndicator<Rate, Optional<CupPoint>> {
     private CupPoint current;
     private final DateUtils<Date> dateUtils;
-    private final CupUtils utils = new CupUtils(elems);
 
     private final Function<Rate, CupPoint> elemFromRate = rate -> CupPoint.builder()
             .start(rate.getCreatedDate())
@@ -29,37 +25,39 @@ public class Cup implements CupIndicator {
             .build();
 
     @Override
-    public Optional<CupPoint> addPoint(Rate rate) {
+    protected Optional<CupPoint> calculate(Rate value) {
         if (current == null) {
-            current = elemFromRate.apply(rate);
+            current = elemFromRate.apply(value);
             return Optional.empty();
         }
 
-        if (dateUtils.getMinutes(current.getStart()) == dateUtils.getMinutes(rate.getCreatedDate())) {
-            current.addPrice(rate.getSell(), rate.getCreatedDate());
+        if (dateUtils.getMinutes(current.getStart()) == dateUtils.getMinutes(value.getCreatedDate())) {
+            current.addPrice(value.getSell(), value.getCreatedDate());
             return Optional.empty();
         }
 
-        Optional<CupPoint> addedPoint = Optional.of(current);
-        elems.add(current);
-        current = elemFromRate.apply(rate);
-        if (elems.size() > 60) {
-            elems.subList(0, 30).clear();
-        }
-
-        return addedPoint;
+        return Optional.of(current);
     }
 
     @Override
-    public void addCupPoint(CupPoint cupPoint) {
-        elems.add(cupPoint);
-        if (elems.size() > 60) {
-            elems.subList(0, 30).clear();
+    public Optional<CupPoint> addPoint(Rate value) {
+        Optional<CupPoint> point = calculate(value);
+        if (point.isPresent()) {
+            points.add(point);
         }
+        return point;
     }
 
-    @Override
-    public CupUtils getUtils() {
-        return utils;
+    public Optional<CupPoint> addPoint(CupPoint value) {
+        points.add(Optional.of(value));
+        return Optional.of(value);
+    }
+
+    public Optional<Decimal> getMax(int start, int end) {
+        return points.subList(start, end).stream().map(Optional::get).map(CupPoint::getDecimalClose).max(Decimal::compareTo);
+    }
+
+    public Optional<Decimal> getMin(int start, int end) {
+        return points.subList(start, end).stream().map(Optional::get).map(CupPoint::getDecimalClose).min(Decimal::compareTo);
     }
 }

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stored-data-deployment
+  labels:
+    app: stored-data
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stored-data
+  template:
+    metadata:
+      labels:
+        app: stored-data
+    spec:
+      containers:
+        - name: stored-data
+          image: sr

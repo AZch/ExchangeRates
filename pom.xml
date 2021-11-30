@@ -28,6 +28,7 @@
         <module>producers/parsers/ForexParser</module>
         <module>process/StrategyEmaRsiStoch</module>
         <module>consumers/StoreParsedRates</module>
+        <module>common/StrategyIndicatorsCompareTest</module>
     </modules>
 
 </project>

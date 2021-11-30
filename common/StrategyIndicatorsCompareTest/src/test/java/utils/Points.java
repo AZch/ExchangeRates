@@ -1,49 +1,7 @@
-package generators;
+package utils;
 
-import com.wcreators.strategyindicators.models.Point;
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class PointsGenerator {
-    public static List<Point> generate(int maxMinutes) {
-//        Random random = new Random();
-//        List<Point> points = new ArrayList<>(maxMinutes);
-        Calendar calendar = Calendar.getInstance();
-//        while (points.size() < maxMinutes) {
-//            points.add(
-//                    Point.builder()
-//                            .time(getNextDate(calendar))
-//                            .value(random.nextInt(10) + random.nextDouble())
-//                            .build()
-//            );
-//        }
-//
-//        return points;
-
-        return Arrays.stream(values)
-                .mapToObj(v ->
-                        Point.builder()
-                                .value(v)
-                                .time(getNextDate(calendar))
-                                .build())
-                .collect(Collectors.toList());
-
-
-    }
-
-    private static Date getNextDate(Calendar calendar) {
-        calendar.add(Calendar.MINUTE, 1);
-        return calendar.getTime();
-    }
-
-    public static double[] getValues() {
-        return values;
-    }
-
-    private static final double[] values = new double[] {
+public class Points {
+    public static double[] inputValues = new double[] {
             1.15847,
             1.15829,
             1.15844,

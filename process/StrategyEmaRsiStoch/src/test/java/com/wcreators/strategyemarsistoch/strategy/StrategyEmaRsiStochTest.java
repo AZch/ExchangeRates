@@ -1,14 +1,12 @@
 package com.wcreators.strategyemarsistoch.strategy;
 
 import com.wcreators.objectmodels.model.Rate;
-import com.wcreators.objectmodels.model.RateAction;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class StrategyEmaRsiStochTest {
 
     @Autowired
-    private StrategyEmaRsiStoch strategy;
+    private StrategyEmaRsiStochastic strategy;
 
     @ParameterizedTest
     @MethodSource("generateRatesForTesting")

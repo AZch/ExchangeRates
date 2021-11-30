@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import static java.lang.Math.max;
@@ -26,5 +27,17 @@ public class CupPoint {
         end = current;
         high = max(high, close);
         low = min(low, close);
+    }
+
+    public Decimal getDecimalClose() {
+        return Decimal.valueOf(close);
+    }
+
+    public Decimal getDecimalHigh() {
+        return Decimal.valueOf(high);
+    }
+
+    public Decimal getDecimalLow() {
+        return Decimal.valueOf(low);
     }
 }

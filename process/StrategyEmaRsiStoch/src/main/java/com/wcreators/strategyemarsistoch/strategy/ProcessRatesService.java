@@ -9,9 +9,5 @@ import java.util.Optional;
 public interface ProcessRatesService {
     Optional<String> addRate(CupPoint rate);
 
-    boolean isRateForStrategy(Rate rate);
-
-    boolean isNotRateForStrategy(Rate rate);
-
     Strategy getStrategy();
 }

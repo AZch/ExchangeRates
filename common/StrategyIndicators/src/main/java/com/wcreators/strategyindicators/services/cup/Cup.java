@@ -5,6 +5,7 @@ import com.wcreators.strategyindicators.models.CupPoint;
 import com.wcreators.strategyindicators.models.Decimal;
 import com.wcreators.strategyindicators.services.storage.StorageIndicator;
 import com.wcreators.utils.date.DateUtils;
+import com.wcreators.utils.date.DateUtilsUtilDate;
 import lombok.RequiredArgsConstructor;
 
 import java.util.*;
@@ -13,7 +14,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class Cup extends StorageIndicator<Rate, Optional<CupPoint>> {
     private CupPoint current;
-    private final DateUtils<Date> dateUtils;
+    private final DateUtils<Date> dateUtils = new DateUtilsUtilDate();
 
     private final Function<Rate, CupPoint> elemFromRate = rate -> CupPoint.builder()
             .start(rate.getCreatedDate())
@@ -36,7 +37,10 @@ public class Cup extends StorageIndicator<Rate, Optional<CupPoint>> {
             return Optional.empty();
         }
 
-        return Optional.of(current);
+        CupPoint addedPoint = current;
+        current = elemFromRate.apply(value);
+
+        return Optional.of(addedPoint);
     }
 
     @Override

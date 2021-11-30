@@ -24,7 +24,7 @@ public class AdapterForexParserService implements AdapterService {
 
     private final ProducerService<CupRatePoint> producerService;
     
-    private final Cup cup = new Cup(new DateUtilsUtilDate());
+    private final Cup cup = new Cup();
 
     @Override
     @Scheduled(fixedDelay = 700)

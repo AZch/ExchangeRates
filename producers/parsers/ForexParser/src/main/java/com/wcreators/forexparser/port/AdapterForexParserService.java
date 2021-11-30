@@ -5,6 +5,7 @@ import com.wcreators.kafkastarter.topics.ProducerService;
 import com.wcreators.objectmodels.model.CupRatePoint;
 import com.wcreators.objectmodels.model.Rate;
 import com.wcreators.strategyindicators.services.cup.Cup;
+import com.wcreators.utils.date.DateUtilsUtilDate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,7 +24,7 @@ public class AdapterForexParserService implements AdapterService {
 
     private final ProducerService<CupRatePoint> producerService;
     
-    private final Cup cup;
+    private final Cup cup = new Cup(new DateUtilsUtilDate());
 
     @Override
     @Scheduled(fixedDelay = 700)

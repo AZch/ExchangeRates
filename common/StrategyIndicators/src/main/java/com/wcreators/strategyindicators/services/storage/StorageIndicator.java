@@ -1,7 +1,5 @@
 package com.wcreators.strategyindicators.services.storage;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +10,9 @@ public abstract class StorageIndicator<T, E> {
     public E addPoint(T value) {
         E point = calculate(value);
         points.add(point);
+        if (points.size() > 150) {
+            points.remove(0);
+        }
         return point;
     }
 

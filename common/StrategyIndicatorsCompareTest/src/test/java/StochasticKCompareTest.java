@@ -24,7 +24,7 @@ public class StochasticKCompareTest {
     @Test
     public void compare() {
         int period = 3;
-        Cup cup = new Cup(new DateUtilsUtilDate());
+        Cup cup = new Cup();
         StochasticK stochasticK = new StochasticK(period, period);
         TimeSeries barSeries = new BaseTimeSeries();
         StochasticOscillatorKIndicator kIndicator = new StochasticOscillatorKIndicator(barSeries, period);

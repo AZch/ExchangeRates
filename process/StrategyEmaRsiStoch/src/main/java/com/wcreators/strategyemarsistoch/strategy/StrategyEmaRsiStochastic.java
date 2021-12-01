@@ -61,15 +61,18 @@ public class StrategyEmaRsiStochastic implements ProcessRatesService {
         Decimal prevCupHigh = cup.get(cup.size() - 2).get().getDecimalHigh();
         Decimal prevCupLow = cup.get(cup.size() - 2).get().getDecimalLow();
         if (!(prevCupHigh.compareTo(lastEmaPoint) > 0 && prevCupLow.compareTo(lastEmaPoint) < 0)) {
+            log.warn("Call 1 high: {}, low: {}, ema: {}", prevCupHigh, prevCupLow, lastEmaPoint);
             return false;
         }
-        Decimal lastCupPointLow = lastCupPoint.getDecimalLow();
-        if (!(lastCupPointLow.compareTo(lastEmaPoint) > 0)) {
+        Decimal lastCupLow = lastCupPoint.getDecimalLow();
+        if (!(lastCupLow.compareTo(lastEmaPoint) > 0)) {
+            log.warn("Call 2 low: {}, ema: {}", lastCupLow, lastEmaPoint);
             return false;
         }
 
         Decimal lastRsiPoint = rsi.lastAdded();
         if (!(lastRsiPoint.compareTo(Decimal.valueOf(50)) > 0)) { // 80 is better
+            log.warn("Call 3 rsi: {}", lastRsiPoint);
             return false;
         }
 
@@ -78,9 +81,12 @@ public class StrategyEmaRsiStochastic implements ProcessRatesService {
         Decimal lastStochasticK = stochasticK.lastAdded();
         Decimal lastStochasticD = stochasticD.lastAdded();
         if (!(lastStochasticK.compareTo(prevStochasticK) > 0 && lastStochasticD.compareTo(prevStochasticD) > 0)) {
+            log.warn("Call 4.1 lastK: {}, prevK: {}", lastStochasticK, prevStochasticK);
+            log.warn("Call 4.2 lastD: {}, prevD: {}", lastStochasticD, prevStochasticD);
             return false;
         }
         if (!(prevStochasticK.compareTo(Decimal.valueOf(30)) < 0 && prevStochasticD.compareTo(Decimal.valueOf(30)) < 0)) {
+            log.warn("Call 5 prevK: {}, prevD: {}", prevStochasticK, prevStochasticD);
             return false;
         }
 
@@ -92,15 +98,18 @@ public class StrategyEmaRsiStochastic implements ProcessRatesService {
         Decimal prevCupHigh = cup.get(cup.size() - 2).get().getDecimalHigh();
         Decimal prevCupLow = cup.get(cup.size() - 2).get().getDecimalLow();
         if (!(prevCupHigh.compareTo(lastEmaPoint) > 0 && prevCupLow.compareTo(lastEmaPoint) < 0)) {
+            log.warn("Put 1 high: {}, low: {}, ema: {}", prevCupHigh, prevCupLow, lastEmaPoint);
             return false;
         }
         Decimal lastCupHigh = lastCupPoint.getDecimalHigh();
         if (!(lastCupHigh.compareTo(lastEmaPoint) < 0)) {
+            log.warn("Put 2 low: {}, ema: {}", lastCupHigh, lastEmaPoint);
             return false;
         }
 
         Decimal lastRsiPoint = rsi.lastAdded();
         if (!(lastRsiPoint.compareTo(Decimal.valueOf(50)) < 0)) { // better if bottom line was crossed in (20 or 30)
+            log.warn("Put 3 rsi: {}", lastRsiPoint);
             return false;
         }
 
@@ -109,9 +118,12 @@ public class StrategyEmaRsiStochastic implements ProcessRatesService {
         Decimal lastStochasticK = stochasticK.lastAdded();
         Decimal lastStochasticD = stochasticD.lastAdded();
         if (!(lastStochasticK.compareTo(prevStochasticK) < 0 && lastStochasticD.compareTo(prevStochasticD) < 0)) {
+            log.warn("Call 4.1 lastK: {}, prevK: {}", lastStochasticK, prevStochasticK);
+            log.warn("Call 4.2 lastD: {}, prevD: {}", lastStochasticD, prevStochasticD);
             return false;
         }
         if (!(prevStochasticK.compareTo(Decimal.valueOf(70)) > 0 && prevStochasticD.compareTo(Decimal.valueOf(70)) > 0)) {
+            log.warn("Call 5 prevK: {}, prevD: {}", prevStochasticK, prevStochasticD);
             return false;
         }
 

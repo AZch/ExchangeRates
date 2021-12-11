@@ -17,6 +17,4 @@ spec:
       containers:
         - name: ema-rsi-stoch-strategy
           image: ers
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 9092
+          imagePullPolicy: Never

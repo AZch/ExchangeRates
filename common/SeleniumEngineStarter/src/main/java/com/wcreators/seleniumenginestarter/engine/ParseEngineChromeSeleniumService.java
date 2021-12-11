@@ -27,6 +27,7 @@ public class ParseEngineChromeSeleniumService implements ParseEngineSeleniumServ
     @PostConstruct
     public void init() {
         log.debug("Start init selenium chrome driver");
+        System.setProperty("webdriver.chrome.whitelistedIps", "");
         System.setProperty(seleniumConfig.getDriver().getType(), seleniumConfig.getDriver().getPath());
 
         options.setHeadless(seleniumConfig.isHeadless());

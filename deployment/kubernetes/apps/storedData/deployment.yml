@@ -1,19 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stored-data-deployment
+  name: stored-data
   labels:
     app: stored-data
+    type: worker
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: stored-data
+      type: worker
   template:
     metadata:
       labels:
         app: stored-data
+        type: worker
     spec:
       containers:
         - name: stored-data
           image: sr
+          ports:
+            - containerPort: 8081
+          imagePullPolicy: Never

@@ -20,7 +20,7 @@ spring:
       parsed-cup-eur-usd:
         consumer: false
         producer: true
-    bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
+    bootstrap-servers: ${kafka_bootstrap_servers:kafka-service:9092}
     properties:
       sasl:
         jaas:

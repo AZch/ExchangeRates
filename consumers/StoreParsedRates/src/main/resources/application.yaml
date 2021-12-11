@@ -10,7 +10,7 @@ spring:
       action-eur-usd:
         consumer: true
         producer: false
-    bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
+    bootstrap-servers: ${kafka_bootstrap_servers:kafka-service:9092}
     properties:
       sasl:
         jaas:
@@ -35,7 +35,7 @@ spring:
       concurrency: 1
       ack-mode: manual_immediate
   datasource:
-    url: jdbc:mysql://localhost:3306/todo_db?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    url: jdbc:mysql://mysql/todo_db?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
     username: root
     password: root
 server:

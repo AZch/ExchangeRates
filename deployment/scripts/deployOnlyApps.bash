@@ -8,7 +8,7 @@ scp -r ./deployment/kubernetes/apps server:~/ExchangeRates/deployment/kubernetes
 
 ## forex producer
 docker build -t fp -f deployment/docker/apps/forexProducer.Dockerfile .
-docker tag ers azch97/fp:latest
+docker tag fp azch97/fp:latest
 docker push azch97/fp:latest
 
 ssh server 'kubectl replace --force -f ~/ExchangeRates/deployment/kubernetes/apps/forexProducer/deployment.yml'
@@ -22,7 +22,7 @@ ssh server 'kubectl replace --force -f ~/ExchangeRates/deployment/kubernetes/app
 
 ## stored
 docker build -t sr -f deployment/docker/apps/storedRates.Dockerfile .
-docker tag ers azch97/sr:latest
+docker tag sr azch97/sr:latest
 docker push azch97/sr:latest
 
 ssh server 'kubectl replace --force -f ~/ExchangeRates/deployment/kubernetes/apps/storedData/service.yml'

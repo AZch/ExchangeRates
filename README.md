@@ -65,4 +65,12 @@
 1. Build docker image
 2. k replace --force -f deployment/kubernetes/apps/storedData/service.yml 
 3. k replace --force -f deployment/kubernetes/apps/storedData/deployment.yml
+
+
+
+minikube ssh 'grep host.minikube.internal /etc/hosts | cut -f1'   
   
+
+mvn clean install
+docker build -t sr -f deployment/docker/apps/storedRates.Dockerfile .
+k replace --force -f deployment/kubernetes/apps/storedData/deployment.yml

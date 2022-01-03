@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: forex-producer
-          image: fp
-          imagePullPolicy: Never
+          image: azch97/fp:latest
+          imagePullPolicy: Always
 

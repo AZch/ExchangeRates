@@ -47,11 +47,9 @@
 
 ### Database
 1. run database in docker
-2. k replace --force -f deployment/kubernetes/database/mysql/service.yml
 
 ### Kafka
 1. run kafka in docker
-2. k replace --force -f deployment/kubernetes/broker/kafka/service.yml
 
 ### Forex Producer
 1. Build docker image

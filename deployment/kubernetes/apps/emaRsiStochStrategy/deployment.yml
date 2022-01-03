@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
         - name: ema-rsi-stoch-strategy
-          image: ers
-          imagePullPolicy: Never
+          image: azch97/ers:latest
+          imagePullPolicy: Always

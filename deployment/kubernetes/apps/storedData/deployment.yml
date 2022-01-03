@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: stored-data
-          image: sr
+          image: azch97/sr:latest
           ports:
             - containerPort: 8081
-          imagePullPolicy: Never
+          imagePullPolicy: Always
